@@ -25,6 +25,7 @@ function App() {
     addTodo,
     completeTodo,
     deleteTodo,
+    editTodo,
     filter,
     setFilter,
   } = useTodos(defaultTodos);
@@ -52,6 +53,7 @@ function App() {
             completed={todo.completed}
             onComplete={() => completeTodo(todo.text)}
             onDelete={() => deleteTodo(todo.text)}
+            onEdit={(newText) => editTodo(todo.text, newText)}
           />
         ))}
       </TodoList>

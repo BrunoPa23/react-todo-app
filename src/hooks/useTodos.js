@@ -49,6 +49,19 @@ function useTodos(defaultTodos = []) {
     setTodos(newTodos);
   };
 
+  const editTodo = (oldText, newText) => {
+    if (!newText || !newText.trim() || oldText === newText) {
+      return;
+    }
+    const newTodos = todos.map(todo => {
+      if (todo.text === oldText) {
+        return { ...todo, text: newText };
+      }
+      return todo;
+    });
+    setTodos(newTodos);
+  };
+
   return {
     todos,
     searchValue,
@@ -59,6 +72,7 @@ function useTodos(defaultTodos = []) {
     addTodo,
     completeTodo,
     deleteTodo,
+    editTodo,
     filter,
     setFilter,
   };

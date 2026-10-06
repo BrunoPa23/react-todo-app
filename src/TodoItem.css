@@ -19,6 +19,17 @@
   text-decoration: line-through;
 }
 
+.TodoItem-input {
+  margin: 24px 0 24px 24px;
+  width: calc(100% - 120px);
+  font-size: 18px;
+  line-height: 24px;
+  font-weight: 400;
+  font-family: 'Montserrat';
+  border: 1px solid #202329;
+  padding: 4px;
+}
+
 .Icon {
   cursor: pointer;
   display: flex;
@@ -46,4 +57,13 @@
 }
 .Icon-delete:hover {
   color: red;
+}
+
+.Icon-edit {
+  position: absolute;
+  top: -24px;
+  right: 40px;
+}
+.Icon-edit:hover {
+  color: #61DAFA;
 }
