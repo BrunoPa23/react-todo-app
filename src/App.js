@@ -45,18 +45,32 @@ function App() {
         setFilter={setFilter}
       />
 
-      <TodoList>
-        {searchedTodos.map(todo => (
-          <TodoItem
-            key={todo.text}
-            text={todo.text}
-            completed={todo.completed}
-            onComplete={() => completeTodo(todo.text)}
-            onDelete={() => deleteTodo(todo.text)}
-            onEdit={(newText) => editTodo(todo.text, newText)}
-          />
-        ))}
-      </TodoList>
+      {totalTodos === 0 && (
+        <p className="TodoList-message">
+          No hay tareas todavia. Crea tu primera tarea con el boton +.
+        </p>
+      )}
+
+      {totalTodos > 0 && searchedTodos.length === 0 && (
+        <p className="TodoList-message">
+          No se encontraron tareas con esos criterios.
+        </p>
+      )}
+
+      {searchedTodos.length > 0 && (
+        <TodoList>
+          {searchedTodos.map(todo => (
+            <TodoItem
+              key={todo.text}
+              text={todo.text}
+              completed={todo.completed}
+              onComplete={() => completeTodo(todo.text)}
+              onDelete={() => deleteTodo(todo.text)}
+              onEdit={(newText) => editTodo(todo.text, newText)}
+            />
+          ))}
+        </TodoList>
+      )}
 
       <CreateTodoButton onCreate={addTodo} />
     </>
