@@ -1,5 +1,7 @@
 # React Todo App
 
+![CI](https://github.com/BrunoPa23/react-todo-app/actions/workflows/ci.yml/badge.svg)
+
 Aplicacion de lista de tareas (To Do) construida con React 18. Permite crear, completar, editar, eliminar y filtrar tareas, con busqueda y persistencia local en el navegador.
 
 ## Funcionalidades
@@ -23,7 +25,7 @@ npm install
 npm start
 ```
 
-La app queda disponible en `http://localhost:3000`.
+La app queda disponible en `http://localhost:5173` (puerto por defecto de Vite).
 
 Para generar el build de produccion:
 
@@ -31,21 +33,41 @@ Para generar el build de produccion:
 npm run build
 ```
 
+Para previsualizar el build de produccion:
+
+```bash
+npm run preview
+```
+
+## Tests
+
+El proyecto usa Vitest y React Testing Library. Incluye tests del hook `useTodos` (agregar, completar, eliminar tareas) y del componente `TodoItem` (render y eventos).
+
+```bash
+npm test
+```
+
+Los tests tambien se ejecutan automaticamente en cada push y pull request mediante el workflow de GitHub Actions (`.github/workflows/ci.yml`), junto con el build de produccion.
+
 ## Estructura de carpetas
 
 ```
 react-todo-app/
-├── public/              archivos estaticos (index.html, iconos, manifest)
+├── .github/workflows/   workflow de CI (test y build)
+├── public/              archivos estaticos (iconos, manifest)
 ├── src/
-│   ├── hooks/           custom hooks (useLocalStorage, useTodos)
-│   ├── App.js           componente raiz
-│   ├── TodoCounter.js    contador de tareas
-│   ├── TodoSearch.js     input de busqueda
-│   ├── TodoFilter.js     filtro de tareas
-│   ├── TodoList.js       lista de tareas
-│   ├── TodoItem.js       item individual de tarea
-│   ├── CreateTodoButton.js  boton para crear tareas
-│   └── index.js         punto de entrada de React
+│   ├── hooks/           custom hooks (useLocalStorage, useTodos) y sus tests
+│   ├── App.jsx          componente raiz
+│   ├── TodoCounter.jsx  contador de tareas
+│   ├── TodoSearch.jsx   input de busqueda
+│   ├── TodoFilter.jsx   filtro de tareas
+│   ├── TodoList.jsx     lista de tareas
+│   ├── TodoItem.jsx     item individual de tarea (y su test)
+│   ├── CreateTodoButton.jsx  boton para crear tareas
+│   ├── setupTests.js    configuracion de Testing Library para Vitest
+│   └── index.jsx        punto de entrada de React
+├── index.html           punto de entrada de Vite
+├── vite.config.js       configuracion de Vite y Vitest
 ├── package.json
 └── README.md
 ```
@@ -54,6 +76,8 @@ react-todo-app/
 
 - React 18
 - JavaScript (sin TypeScript)
-- Create React App (react-scripts)
+- Vite (bundler y dev server)
+- Vitest y React Testing Library (tests)
+- GitHub Actions (CI)
 - CSS plano por componente
 - localStorage como persistencia local
