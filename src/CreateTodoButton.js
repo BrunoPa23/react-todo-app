@@ -1,15 +1,17 @@
 import './CreateTodoButton.css';
 
-function CreateTodoButton() {
+function CreateTodoButton({ onCreate }) {
+  const handleClick = () => {
+    const text = window.prompt('Escribe el texto de la nueva tarea');
+    if (onCreate) {
+      onCreate(text);
+    }
+  };
+
   return (
-    <button className="CreateTodoButton" 
-    onClick={
-      (event)=> {
-        console.log('Le diste click')
-        console.log(event)
-        console.log(event.target)
-    }}
-    >+</button>
+    <button className="CreateTodoButton" onClick={handleClick}>
+      +
+    </button>
   );
 }
 

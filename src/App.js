@@ -1,10 +1,9 @@
-import React from 'react';
 import { TodoCounter } from './TodoCounter';
 import { TodoSearch } from './TodoSearch';
 import { TodoList } from './TodoList';
 import { TodoItem } from './TodoItem';
 import { CreateTodoButton } from './CreateTodoButton';
-import { useLocalStorage } from './hooks/useLocalStorage';
+import { useTodos } from './hooks/useTodos';
 
 const defaultTodos = [
   { text: 'Cortar cebolla', completed: true },
@@ -16,30 +15,26 @@ const defaultTodos = [
 ];
 
 function App() {
-  const [todos, setTodos] = useLocalStorage('TODOS_V1', defaultTodos);
-
-  const [searchValue, setSearchValue] = React.useState('');
-
-  const completedTodos = todos.filter(
-    todo => !!todo.completed
-  ).length;
-  const totalTodos = todos.length;
-
-  const searchedTodos = todos.filter(todo =>
-    todo.text.toLowerCase().includes(searchValue.toLowerCase())
-  );
-  console.log('Los usuarios buscan todos de ' + 
-  searchValue);
+  const {
+    searchValue,
+    setSearchValue,
+    searchedTodos,
+    completedTodos,
+    totalTodos,
+    addTodo,
+    completeTodo,
+    deleteTodo,
+  } = useTodos(defaultTodos);
 
   return (
     <>
-      <TodoCounter 
-      completed={completedTodos} 
-      total={totalTodos} 
+      <TodoCounter
+        completed={completedTodos}
+        total={totalTodos}
       />
-      <TodoSearch 
-      searchValue= {searchValue}
-      setSearchValue={setSearchValue}
+      <TodoSearch
+        searchValue={searchValue}
+        setSearchValue={setSearchValue}
       />
 
       <TodoList>
@@ -48,11 +43,13 @@ function App() {
             key={todo.text}
             text={todo.text}
             completed={todo.completed}
+            onComplete={() => completeTodo(todo.text)}
+            onDelete={() => deleteTodo(todo.text)}
           />
         ))}
       </TodoList>
-      
-      <CreateTodoButton />
+
+      <CreateTodoButton onCreate={addTodo} />
     </>
   );
 }
