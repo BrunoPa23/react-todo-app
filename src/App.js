@@ -4,6 +4,7 @@ import { TodoSearch } from './TodoSearch';
 import { TodoList } from './TodoList';
 import { TodoItem } from './TodoItem';
 import { CreateTodoButton } from './CreateTodoButton';
+import { useLocalStorage } from './hooks/useLocalStorage';
 
 const defaultTodos = [
   { text: 'Cortar cebolla', completed: true },
@@ -14,25 +15,8 @@ const defaultTodos = [
 
 ];
 
-const LOCAL_STORAGE_KEY = 'TODOS_V1';
-
 function App() {
-  const [todos, setTodos] = React.useState(() => {
-    try {
-      const localStorageTodos = localStorage.getItem(LOCAL_STORAGE_KEY);
-      return localStorageTodos ? JSON.parse(localStorageTodos) : defaultTodos;
-    } catch (error) {
-      return defaultTodos;
-    }
-  });
-
-  React.useEffect(() => {
-    try {
-      localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(todos));
-    } catch (error) {
-      // si localStorage no esta disponible, las tareas no se persisten
-    }
-  }, [todos]);
+  const [todos, setTodos] = useLocalStorage('TODOS_V1', defaultTodos);
 
   const [searchValue, setSearchValue] = React.useState('');
 
