@@ -11,3 +11,10 @@ body {
   position: relative;
   min-height: 100vh;
 }
+
+.TodoList-message {
+  text-align: center;
+  color: #767676;
+  font-size: 18px;
+  margin: 32px 24px;
+}
