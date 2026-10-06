@@ -1,5 +1,6 @@
 import { TodoCounter } from './TodoCounter';
 import { TodoSearch } from './TodoSearch';
+import { TodoFilter } from './TodoFilter';
 import { TodoList } from './TodoList';
 import { TodoItem } from './TodoItem';
 import { CreateTodoButton } from './CreateTodoButton';
@@ -24,6 +25,8 @@ function App() {
     addTodo,
     completeTodo,
     deleteTodo,
+    filter,
+    setFilter,
   } = useTodos(defaultTodos);
 
   return (
@@ -35,6 +38,10 @@ function App() {
       <TodoSearch
         searchValue={searchValue}
         setSearchValue={setSearchValue}
+      />
+      <TodoFilter
+        filter={filter}
+        setFilter={setFilter}
       />
 
       <TodoList>

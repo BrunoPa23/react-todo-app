@@ -1,0 +1,21 @@
+.TodoFilter {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin: 16px 24px;
+}
+
+.TodoFilter-button {
+  background: #F9FBFC;
+  border: 2px solid #202329;
+  border-radius: 2px;
+  padding: 8px 16px;
+  font-family: 'Montserrat';
+  font-weight: 400;
+  cursor: pointer;
+}
+
+.TodoFilter-button--active {
+  background: #202329;
+  color: #F9FBFC;
+}
